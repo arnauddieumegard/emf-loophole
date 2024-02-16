@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Definition
+Bundle-SymbolicName: com.obeo.loophole.extensionpoint.definition;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: OBEO
+Automatic-Module-Name: com.obeo.loophole.extensionpoint.definition
+Bundle-RequiredExecutionEnvironment: JavaSE-16
+Export-Package: com.obeo.loophole.extensionpoint.definition
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.22.0",
+ org.eclipse.e4.core.di;bundle-version="1.7.800"

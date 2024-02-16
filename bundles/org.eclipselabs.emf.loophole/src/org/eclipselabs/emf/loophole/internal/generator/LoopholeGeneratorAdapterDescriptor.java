@@ -1,15 +1,17 @@
 /*******************************************************************************
- * Copyright (c) 2013 Obeo.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *     Obeo - initial API and implementation
+ *  Copyright (c) 2013, 2024 Obeo. 
+ *  All rights reserved. This program and the accompanying materials
+ *  are made available under the terms of the Eclipse Public License v2.0
+ *  which accompanies this distribution, and is available at
+ *  http://www.eclipse.org/legal/epl-v20.html
+ *   
+ *   Contributors:
+ *       Obeo - initial API and implementation
+ *  
  *******************************************************************************/
 package org.eclipselabs.emf.loophole.internal.generator;
 
+import com.obeo.loophole.extensionpoint.definition.InjectCustomCodeContribution;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collections;
@@ -34,6 +36,7 @@ import org.eclipselabs.emf.loophole.internal.model.GenGapPackage;
 
 /**
  * @author Mikaël Barbero - Remove any MWE dependencies
+ * @author Gabriel Jolly - Extension point
  */
 public class LoopholeGeneratorAdapterDescriptor implements GeneratorAdapterFactory.Descriptor {
 
@@ -83,6 +86,7 @@ public class LoopholeGeneratorAdapterDescriptor implements GeneratorAdapterFacto
 		sb.append("package ").append(customClassName.substring(0, customLastIndexOfDot)).append(";\n\n");
 		sb.append("import ").append(className).append(";\n\n");
 		sb.append("public class ").append(customClassName.substring(customLastIndexOfDot+1)).append(" extends ").append(className.substring(lastIndexOfDot+1)).append(" {\n\n");
+		InjectCustomCodeContribution.addGeneratedCode(className, customClassName, sb);
 		sb.append("}\n");
 		
 		try {
@@ -110,6 +114,7 @@ public class LoopholeGeneratorAdapterDescriptor implements GeneratorAdapterFacto
 		sb.append("\tpublic ").append(customClassName.substring(customLastIndexOfDot+1)).append("(AdapterFactory adapterFactory) {\n");
 		sb.append("\t\tsuper(adapterFactory);\n");
 		sb.append("\t}\n");
+		InjectCustomCodeContribution.addGeneratedCode(className, customClassName, sb);
 		sb.append("}\n");
 		
 		try {
